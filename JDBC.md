@@ -38,7 +38,7 @@ public class Main {
         try(Connection connection = DriverManager.getConnection(url,user,password)){
             System.out.println("✅ Connected to MySQL successfully!");
 
-            //4-> create statement
+            //4-----> create statement
             try(Statement statement = connection.createStatement()){
 
                 //5-----> execute statement
