@@ -207,7 +207,7 @@ String email = rs.getString("email");
 ---
 
 ```java
-System.out.printf("id=%d name=%s email=%s%n", id, name, email);
+System.out.println("id=" + id + " name=" + name + " email=" + email);
 ```
 
 ➡️ Prints the data nicely formatted for each record in the table.
