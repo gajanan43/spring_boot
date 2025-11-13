@@ -3,6 +3,12 @@
 - Hibernate is ORM(Object Relation Mapping) Framework.
 - It is solve the problem of jdbc beacuse there in write lot of qurey.
 
+## Topic:
+1) Changing the table & cloumn name
+2) Embeddable
+3) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
+4) 
+
 ## Setup: 
 
 1) Create a project into maven
@@ -72,4 +78,5 @@ public class Main {
 3) Cloumn
 4) Transit
 5) Embeddable -> Merge two seperate tables into single(This notation write which one connect)
+
 
