@@ -49,7 +49,7 @@ public class Main {
 
         Session session=sf.openSession();
 
-        s1=session.find(Student.class,4); //find object to the delete query
+        s1=session.find(Student.class,4); //find object to the delete data realted object
         Transaction tx= session.beginTransaction();
 
 //        session.merge(s1); // Update & insert Query
