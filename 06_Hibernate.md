@@ -1,5 +1,8 @@
 # Hibernate:
 
+- Hibernate is ORM(Object Relation Mapping) Framework.
+- It is solve the problem of jdbc beacuse there in write lot of qurey.
+
 ## Setup: 
 
 1) Create a project into maven
@@ -8,8 +11,6 @@
 4) Create a hibernate.cfg.xml file inside resources folder(write a connection property for DB)
 5) Write a main file(CURD operation)
 
-- Hibernate is ORM(Object Relation Mapping) Framework.
-- It is solve the problem of jdbc beacuse there in write lot of qurey.
 
 ## Method in Hibernate:
 1) persist -> To insert data into the DB
