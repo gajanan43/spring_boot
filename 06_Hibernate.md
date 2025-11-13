@@ -19,3 +19,48 @@
 4) get  -> View data from DB
 5) find  -> Find the specific data from DB
 
+```
+package org.example;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+public class Main {
+    public static void main(String [] args) {
+
+        Student s1=new Student();
+//        s1.setId(4);
+//        s1.setName("You");
+//        s1.setEmail("demo4@gmail.com");
+
+//        Student s2=null;
+
+//        Configuration cfg=new Configuration();
+//        cfg.addAnnotatedClass(org.example.Student.class);
+//        cfg.configure();
+
+        SessionFactory sf= new  Configuration()
+                .addAnnotatedClass(org.example.Student.class)
+                .configure()
+                .buildSessionFactory();   // cfg.buildSessionFactory();
+
+        Session session=sf.openSession();
+
+        s1=session.find(Student.class,4); //find object to the delete query
+        Transaction tx= session.beginTransaction();
+
+//        session.merge(s1); // Update & insert Query
+        session.remove(s1); // Delete query
+//        session.persist(s1);    // Insert Query
+        tx.commit();
+        sf.close();
+        session.close();
+        System.out.println(s1);
+    }
+}
+
+```
+
