@@ -65,3 +65,11 @@ public class Main {
 
 ```
 
+
+## Notations in Hibernate:
+1) Entity
+2) Id
+3) Cloumn
+4) Transit
+5) 
+
