@@ -71,5 +71,5 @@ public class Main {
 2) Id
 3) Cloumn
 4) Transit
-5) 
+5) Embeddable
 
