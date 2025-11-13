@@ -36,7 +36,7 @@ public class Main {
 //        s1.setName("You");
 //        s1.setEmail("demo4@gmail.com");
 
-//        Student s2=null;
+//        Student s2=null; // Create a null object to read a specific row
 
 //        Configuration cfg=new Configuration();
 //        cfg.addAnnotatedClass(org.example.Student.class);
@@ -48,7 +48,7 @@ public class Main {
                 .buildSessionFactory();   // cfg.buildSessionFactory();
 
         Session session=sf.openSession();
-
+//      s2=session.get((Student.class,4);  //Read Query
         s1=session.find(Student.class,4); //find object to the delete data realted object
         Transaction tx= session.beginTransaction();
 
@@ -59,6 +59,7 @@ public class Main {
         sf.close();
         session.close();
         System.out.println(s1);
+//      System.out.println(s2);
     }
 }
 
