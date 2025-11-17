@@ -93,8 +93,11 @@ public class Main {
 ---
 
 # Interview Topics:
-
-
+1) Mapping
+2) Fetch Types
+3) Hibernate States (Transient, Persistent, Detached)
+4) Caching (L1, L2)
+5) Cascade Types
 
 # Mapping:
 
@@ -410,7 +413,333 @@ Transient, Persistent, Detached.
 
 `session.update()` or `session.merge()`.
 
+
 ---
+---
+
+
+# 🔥 **Hibernate Caching (Very Important Topic)**
+
+Hibernate uses cache to **reduce database calls** and improve performance.
+
+There are two main caches:
+
+---
+
+# ✅ **1. Level 1 Cache (L1 Cache)**
+
+### ✔ **Default cache**
+
+* Enabled by default
+* Cannot be disabled
+* Works **per Session**
+* Each session has its **own** L1 cache
+
+### ✔ What is cached?
+
+Objects that you load using:
+
+```java
+session.get(Student.class, 1);
+```
+
+### ✔ Example
+
+```java
+Session session = factory.openSession();
+
+Student s1 = session.get(Student.class, 1);  // DB hit
+Student s2 = session.get(Student.class, 1);  // No DB hit (from L1 cache)
+```
+
+### ✔ L1 Cache clears when:
+
+* `session.clear()`
+* `session.evict(object)`
+* `session.close()`
+
+---
+
+# 🔥 **Most Important Interview Point**
+
+**Level 1 cache works ONLY with one session.**
+If you open a new session → cache is empty.
+
+---
+
+# 🟦 **2. Level 2 Cache (L2 Cache)**
+
+### ✔ Not enabled by default
+
+### ✔ Shared across sessions
+
+### ✔ Slower than L1 but reduces DB calls among multiple sessions
+
+To enable L2 cache, you must add a caching provider like:
+
+* EhCache
+* Infinispan
+* OSCache
+* Redis (new setups)
+
+---
+
+# ✔ **Example: Enabling Level 2 Cache**
+
+### **Step 1: Add dependency**
+
+(EhCache Example)
+
+```xml
+<dependency>
+    <groupId>org.hibernate.orm</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>6.x.x</version>
+</dependency>
+```
+
+---
+
+### **Step 2: Enable second-level cache in config**
+
+```xml
+<property name="hibernate.cache.use_second_level_cache">true</property>
+<property name="hibernate.cache.region.factory_class">
+    org.hibernate.cache.ehcache.EhCacheRegionFactory
+</property>
+```
+
+---
+
+### **Step 3: Mark an entity as cacheable**
+
+```java
+@Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Student {
+    @Id
+    private int id;
+
+    private String name;
+}
+```
+
+Now, this entity supports L2 caching.
+
+---
+
+# ✔ Example Scenario (L2 Cache Working)
+
+### Session 1:
+
+```java
+Session s1 = factory.openSession();
+Student st1 = s1.get(Student.class, 1);   // DB hit
+s1.close();
+```
+
+### Session 2:
+
+```java
+Session s2 = factory.openSession();
+Student st2 = s2.get(Student.class, 1);   // No DB hit (from L2 cache)
+```
+
+L2 Cache is **shared across sessions**, so it prevents repeated DB hits.
+
+---
+
+# 📌 **L1 vs L2 Cache Comparison**
+
+| Feature       | L1 Cache        | L2 Cache                |
+| ------------- | --------------- | ----------------------- |
+| Default       | ✔ Yes           | ❌ No                    |
+| Per Session   | ✔ Yes           | ❌ No (shared)           |
+| When Cleared? | session.close() | app shutdown / manual   |
+| Speed         | Fastest         | Fast                    |
+| Need Config?  | No              | Yes                     |
+| Cache scope   | Session         | SessionFactory (global) |
+
+---
+
+# 🎯 Top Interview Questions (Caching)
+
+1. **Is Level 1 cache mandatory?**
+   ✔ Yes, always enabled.
+
+2. **Is Level 2 cache mandatory?**
+   ❌ No, must be configured manually.
+
+3. **Can L1 and L2 work together?**
+   ✔ Yes, L1 is checked first, then L2.
+
+4. **Does `session.clear()` clear L2 cache?**
+   ❌ No, only L1 cache is cleared.
+
+5. **What happens on session.close()?**
+   ✔ L1 cache is destroyed
+   ❌ L2 cache remains alive
+
+---
+---
+
+
+# 🔥 **Cascade Types in Hibernate**
+
+Cascade means:
+👉 When you perform an operation on **Parent**, Hibernate automatically performs the same operation on **Child**.
+
+Example:
+Delete a **Student**, automatically delete **Laptop**.
+
+---
+
+# ✅ **List of Cascade Types**
+
+| Cascade Type | Meaning                             |
+| ------------ | ----------------------------------- |
+| `PERSIST`    | Save parent → child is also saved   |
+| `MERGE`      | Merge parent → child is also merged |
+| `REMOVE`     | Delete parent → child is deleted    |
+| `REFRESH`    | Refresh parent → refresh child      |
+| `DETACH`     | Detach parent → child detached      |
+| `ALL`        | Applies all operations              |
+
+---
+
+# 📌 Example Entity (Parent → Child)
+
+### **Student (Parent)**
+
+```java
+@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+private List<Laptop> laptops;
+```
+
+### **Laptop (Child)**
+
+```java
+@ManyToOne
+@JoinColumn(name = "student_id")
+private Student student;
+```
+
+---
+
+# 🇦 **Understanding Each Cascade Type**
+
+---
+
+# 1️⃣ **CascadeType.PERSIST**
+
+When parent is saved → child is automatically saved.
+
+### Example:
+
+```java
+Student s = new Student();
+Laptop l = new Laptop();
+s.getLaptops().add(l);   // add child
+l.setStudent(s);
+
+session.persist(s);      // only saving parent
+```
+
+✔ Laptop is also saved automatically.
+
+---
+
+# 2️⃣ **CascadeType.MERGE**
+
+When parent is merged → child is merged.
+
+Use case: when both parent & child were detached, and you reattach the parent.
+
+```java
+session.merge(student);
+```
+
+✔ Updates happen on both parent and children.
+
+---
+
+# 3️⃣ **CascadeType.REMOVE**
+
+Delete parent → delete child.
+
+```java
+session.remove(student);
+```
+
+✔ Child (Laptop) will also be deleted.
+
+⚠ Without cascade = REMOVE
+Hibernate throws **ConstraintViolationException**.
+
+---
+
+# 4️⃣ **CascadeType.REFRESH**
+
+Reload fresh data from database for parent and child.
+
+```java
+session.refresh(student);
+```
+
+---
+
+# 5️⃣ **CascadeType.DETACH**
+
+Detach parent → detach all children.
+
+```java
+session.detach(student);
+```
+
+Child becomes **detached** too.
+
+---
+
+# 6️⃣ **CascadeType.ALL**
+
+Shortcut for **PERSIST + MERGE + REMOVE + REFRESH + DETACH**
+
+Most commonly used.
+
+```java
+cascade = CascadeType.ALL
+```
+
+---
+
+# 🧠 **Most Important Interview Questions**
+
+### **1. What is CascadeType.ALL?**
+
+A shortcut for all cascades (persist, merge, remove, detach, refresh).
+
+### **2. What is the most dangerous cascade?**
+
+`CascadeType.REMOVE`
+Because deleting parent deletes all children.
+
+### **3. Does cascade affect fetching?**
+
+❌ No
+Cascade is for operations
+FetchType is for loading.
+
+### **4. When do we use cascade?**
+
+When child lifecycle is fully dependent on parent.
+
+Example:
+Student → Laptop (dependent)
+Order → OrderItems
+
+---
+
 
 
 
