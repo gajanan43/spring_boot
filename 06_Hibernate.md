@@ -89,6 +89,11 @@ public class Main {
 6) Embeddable        ->    Merge two seperate tables into single(This notation write which one connect)
 
 ```
+---
+---
+
+# Interview Topics:
+
 
 
 # Mapping:
@@ -186,6 +191,8 @@ private List<Student> students;
 | **Many-To-Many** | Many ↔ Many | Students ↔ Courses |
 
 ---
+---
+
 
 # ✅ **Fetch Types in Hibernate**
 
@@ -268,6 +275,140 @@ Hibernate **immediately fetches laptops** too (even if you don’t use them).
 # ✔ Best Practice
 
 Always use LAZY fetch type unless you specifically need EAGER.
+
+
+---
+---
+
+
+# 🔥 **Hibernate Object States**
+
+Hibernate uses 3 states to describe the lifecycle of an object:
+
+---
+
+# ✅ **1. Transient State**
+
+Object is **not associated with Hibernate Session**, and **not saved** in the database.
+
+### ✔ Characteristics
+
+* No primary key assigned (ID = null)
+* Not in Session
+* Not stored in database
+
+### ✔ Example
+
+```java
+Student s = new Student();   // new keyword
+s.setName("Ram");            // Transient
+```
+
+At this moment:
+✔ Object is in Java memory
+✘ Not saved in DB
+✘ Session doesn’t know about it
+
+---
+
+# ✅ **2. Persistent State**
+
+Object is **associated with a Hibernate Session**, and Hibernate tracks it.
+
+### When it becomes Persistent?
+
+✔ After calling `session.save()`
+✔ After calling `session.persist()`
+✔ When loading from DB (`session.get()` or `session.load()`)
+
+### ✔ Example
+
+```java
+Session session = factory.openSession();
+session.beginTransaction();
+
+Student s = new Student();       // Transient
+s.setName("Ram");
+
+session.save(s);                 // Now Persistent
+```
+
+Now the object is:
+✔ Linked with Session
+✔ Stored in DB
+✔ Any changes to object are automatically updated
+
+### ✔ Example (auto-update)
+
+```java
+s.setName("Raj");   // Hibernate automatically updates in DB when transaction commits
+```
+
+---
+
+# ❌ **3. Detached State**
+
+Object was **Persistent earlier**, but **Session is closed** or object is removed from Session.
+
+### When it becomes Detached?
+
+✔ After calling `session.close()`
+✔ After calling `session.clear()`
+✔ After calling `session.evict(object)`
+
+### ✔ Example
+
+```java
+session.close();     // Now Student object is Detached
+s.setName("Rakesh"); // No automatic update
+```
+
+Now changes **do not** reflect in DB unless you reattach it.
+
+---
+
+# 🔁 **Reattaching Detached Object**
+
+Use:
+
+* `session.update(object)`
+* `session.merge(object)`
+
+Example:
+
+```java
+Session session2 = factory.openSession();
+session2.beginTransaction();
+
+session2.update(s); // Now it becomes Persistent again
+```
+
+---
+
+# 🧠 Quick Comparison Table
+
+| State          | In DB? | In Session? | Auto Update? |
+| -------------- | ------ | ----------- | ------------ |
+| **Transient**  | ❌ No   | ❌ No        | ❌ No         |
+| **Persistent** | ✔ Yes  | ✔ Yes       | ✔ Yes        |
+| **Detached**   | ✔ Yes  | ❌ No        | ❌ No         |
+
+---
+
+# 🎯 Most Important Interview Questions
+
+### **1. What are the Hibernate states?**
+
+Transient, Persistent, Detached.
+
+### **2. Difference between Transient and Detached?**
+
+* Transient → never stored in DB
+* Detached → stored earlier but Session closed
+
+### **3. How to convert Detached to Persistent?**
+
+`session.update()` or `session.merge()`.
 
 ---
 
