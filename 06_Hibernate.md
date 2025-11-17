@@ -73,10 +73,13 @@ public class Main {
 
 
 ## Notations in Hibernate:
-1) Entity
-2) Id
-3) Cloumn
-4) Transit
-5) Embeddable -> Merge two seperate tables into single(This notation write which one connect)
+```
+1) Entity(name=" ")  ->    Change the table name
+2) Id                ->    Delcare the primary key in the table
+3) Cloumn(name=" ")  ->    Change the column name
+4) Transit           ->    Skip this column in the table
+5) Table(name=" ")   ->    Change the table name
+6) Embeddable        ->    Merge two seperate tables into single(This notation write which one connect)
 
+```
 
