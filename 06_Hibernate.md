@@ -9,11 +9,11 @@
 3) Changing the table & cloumn name
 4) Embeddable
 5) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
-   i) OneToOne()
-   ii) OneToMany()
-   
-   
-   
+6) Eager & Lazy fetch
+7) Hibernate Caching(L1 & L2 caching)
+8) HQL(Hibernate Query Language)
+9) Get VS Load
+10) L2 cache using Ehcache   
 
 
 ## Setup: 
