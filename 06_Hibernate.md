@@ -9,7 +9,12 @@
 3) Changing the table & cloumn name
 4) Embeddable
 5) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
-6) 
+   i) OneToOne()
+   ii) OneToMany()
+   
+   
+   
+
 
 ## Setup: 
 
@@ -84,4 +89,104 @@ public class Main {
 6) Embeddable        ->    Merge two seperate tables into single(This notation write which one connect)
 
 ```
+
+
+# Mapping:
+
+# ✅ **1) One-To-One**
+
+### ✔ Meaning: One person → One passport
+
+### **Person.java**
+
+```java
+@OneToOne
+@JoinColumn(name = "passport_id")
+private Passport passport;
+```
+
+### **Passport.java**
+
+```java
+@OneToOne(mappedBy = "passport")
+private Person person;
+```
+
+---
+
+# ✅ **2) One-To-Many**
+
+### ✔ Meaning: One student → Many laptops
+
+### **Student.java**
+
+```java
+@OneToMany(mappedBy = "student")
+private List<Laptop> laptops;
+```
+
+### **Laptop.java**
+
+```java
+@ManyToOne
+@JoinColumn(name = "student_id")
+private Student student;
+```
+
+---
+
+# ✅ **3) Many-To-One**
+
+### ✔ Meaning: Many laptops → One student
+
+(Reverse of One-to-Many)
+
+### **Laptop.java**
+
+```java
+@ManyToOne
+@JoinColumn(name = "student_id")
+private Student student;
+```
+
+---
+
+# ✅ **4) Many-To-Many**
+
+### ✔ Meaning: Students ↔ Courses (both many)
+
+### **Student.java**
+
+```java
+@ManyToMany
+@JoinTable(
+    name = "student_course",
+    joinColumns = @JoinColumn(name = "student_id"),
+    inverseJoinColumns = @JoinColumn(name = "course_id")
+)
+private List<Course> courses;
+```
+
+### **Course.java**
+
+```java
+@ManyToMany(mappedBy = "courses")
+private List<Student> students;
+```
+
+---
+
+# 🎯 **Super Simple Summary**
+
+| Mapping          | Meaning     | Real-Life Example  |
+| ---------------- | ----------- | ------------------ |
+| **One-To-One**   | 1 → 1       | Person → Passport  |
+| **One-To-Many**  | 1 → Many    | Student → Laptops  |
+| **Many-To-One**  | Many → 1    | Laptops → Student  |
+| **Many-To-Many** | Many ↔ Many | Students ↔ Courses |
+
+---
+
+
+
 
