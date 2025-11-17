@@ -4,10 +4,12 @@
 - It is solve the problem of jdbc beacuse there in write lot of qurey.
 
 ## Topic:
-1) Changing the table & cloumn name
-2) Embeddable
-3) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
-4) 
+1) Hibernate connect to DB
+2) Perform CRUD operation
+3) Changing the table & cloumn name
+4) Embeddable
+5) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
+6) 
 
 ## Setup: 
 
