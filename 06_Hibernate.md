@@ -87,6 +87,7 @@ public class Main {
 4) Transit           ->    Skip this column in the table
 5) Table(name=" ")   ->    Change the table name
 6) Embeddable        ->    Merge two seperate tables into single(This notation write which one connect)
+7) Cacheable         ->    This is used to run L2 cache
 
 ```
 ---
