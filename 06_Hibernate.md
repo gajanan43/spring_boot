@@ -10,7 +10,7 @@
 4) Embeddable
 5) Mapping(OneToOne, OneToMany, ManyToOne, ManyToMany)
 6) Eager & Lazy fetch
-7) Hibernate Caching(L1 & L2 caching)
+7) Hibernate Caching(L1 cache(Enabled by default (Session-level)) & L2 caching)
 8) HQL(Hibernate Query Language)
 9) Get VS Load
 10) L2 cache using Ehcache   
@@ -186,6 +186,92 @@ private List<Student> students;
 | **Many-To-Many** | Many ↔ Many | Students ↔ Courses |
 
 ---
+
+# ✅ **Fetch Types in Hibernate**
+
+Hibernate has **two fetch types**:
+
+---
+
+# **1. LAZY Fetch (Default for Collections)**
+
+👉 Data is loaded **only when required** (on demand).
+👉 Hibernate creates a **proxy** object.
+👉 Saves memory & improves performance.
+
+### **Example**
+
+```java
+@Entity
+public class Student {
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private List<Laptop> laptops;
+}
+```
+
+### When you call:
+
+```java
+student.getLaptops();
+```
+
+Only then Hibernate hits the database to load `laptops`.
+
+---
+
+# **2. EAGER Fetch (Immediate Loading)**
+
+👉 Loads related (child) entity **immediately** with parent.
+👉 Slower because it loads everything at once.
+👉 Should be avoided for large collections.
+
+### Example
+
+```java
+@Entity
+public class Student {
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    private List<Laptop> laptops;
+}
+```
+
+Now when you load student:
+
+```java
+Student s = session.get(Student.class, 1);
+```
+
+Hibernate **immediately fetches laptops** too (even if you don’t use them).
+
+---
+
+# 📌 **Default Fetch Types**
+
+| Mapping Type  | Default Fetch Type |
+| ------------- | ------------------ |
+| `@OneToOne`   | EAGER              |
+| `@ManyToOne`  | EAGER              |
+| `@OneToMany`  | LAZY               |
+| `@ManyToMany` | LAZY               |
+
+---
+
+# ✔ Interview Question
+
+**Q: Which fetch type is better?**
+**A: LAZY**, because it loads only required data and avoids heavy joins.
+
+---
+
+# ✔ Best Practice
+
+Always use LAZY fetch type unless you specifically need EAGER.
+
+---
+
+
 
 
 
