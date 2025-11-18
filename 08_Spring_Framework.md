@@ -4,6 +4,6 @@
 
 
 ## Topic: 
-1) Scope
+1) Scope[Singleton(Only one object is created for the entire Spring container.) & prototype]
 2) 
 
