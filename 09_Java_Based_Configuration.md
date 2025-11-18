@@ -130,8 +130,42 @@ public Laptop  laptop() {
 
 ```
 
-## 6) Component of Sterotype Annotation:
+## 6) Component of Sterotype Annotation(No need to create Beans)
+
+```
+@Component ----> On all The classes
+
+@Configuration
+@ComponentScan("org.example")
+public class AppConfig {
+    // No Body
+}
 
 ```
 
+## 7) Autowired Filed, Constructor, Setter:(Most preferable Atuowird on setter)
+
+```
+Solution 1:  Using quilifier run laptop bean(object) || Otherwise @Component delete from Desktop
+@Autowired
+@Qualifier("laptop")   ---> name of class with Small Case
+private Computer comp;
+
+```
+
+## 8) Primary Annotation:(If write a Quilifer & Primary ++++++++++ Quilifer get a first Priority )
+
+```
+@Primary  ----> On the top of Class which you want to run
+```
+
+## 9) Scope & Value Annotation:
+
+```
+@Scope("prototype") ----> It is used two object of same class run with differently(allow to run bean run two times)
+```
+
+```
+@Value("25")      ---> To assign the value of the private members
+private int age;
 ```
