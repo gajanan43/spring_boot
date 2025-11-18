@@ -65,6 +65,38 @@ You basically tell Spring:
 ### 4) Constructor Injection:
 
 ```
+Solutions:
+
+1) Int this solution if i change the order passed value of constructor then shows error
+
+<constructor-arg value="21"/>
+<constructor-arg ref="lap1"/>
+
+2) If constructor take two int parameter then again problem
+
+<constructor-arg type="org.example.Laptop" ref="lap1"/>
+<constructor-arg type="int" value="21"/>
+
+3) Best solution using index
+
+<constructor-arg index="1" ref="lap1"/>
+<constructor-arg index="0" value="21"/>
+
+4) Work on sequence of parameter if change the sequence then
+
+<constructor-arg name="lap" ref="lap1"/>
+<constructor-arg name="age" value="21"/>
+
+@ConstructorProperties({"age","lap"})
+ public Alien(int age, Laptop lap) {
+    this.age = age;
+    this.lap = lap;
+}
 
 ```
 
+- It is used to passes the value to constructor
+
+### 5) Creating Interface:
+
+### 6)
