@@ -47,6 +47,24 @@ You basically tell Spring:
 
 ---
 
+### 2) Setter Injection(Property):
 
- 
+```
+<property name="age" value="22"> </property>
+ ```
+- Set private value using this.
+
+### 3) Ref Attribute:
+
+```
+<property name="lap" ref="lap1"> </property>
+```
+- It is used to injecting the object
+- For this two beans must created
+
+### 4) Constructor Injection:
+
+```
+
+```
 
