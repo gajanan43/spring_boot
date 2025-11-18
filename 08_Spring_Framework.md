@@ -11,7 +11,7 @@
 You basically tell Spring:
 👉 *"How many times should this bean object be created?"*
 
-# 🚀 **1. Singleton (Default Scope)**
+🚀 **1. Singleton (Default Scope)**
 
 * **Only one object** is created for the entire Spring container.
 * Same object is returned every time you request that bean.
@@ -30,7 +30,7 @@ You basically tell Spring:
 
 ---
 
-# 🚀 **2. Prototype**
+🚀 **2. Prototype**
 
 * A **new object** is created **every time** the bean is requested.
 
