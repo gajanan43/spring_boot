@@ -46,5 +46,28 @@ public class HomeController {
 - Tomcat Jasper is depends on which tomcat server running(Tomacat version=Tocat Jasper Version).
 
 ## 4) Sending data to controller:
+- I created form it accept two values from user.
+  
+## 5) Accepting Data the servlet way
+- Accepting data from user through HttpServletRequest object 
 
-## 5)
+## 6) Display Data on Result Page
+- To mantain values between pages needs to session
+- By using HttpSession object maintains
+- in jsp page accpet like ```<%= session.getAttribute("result")%>``` OR ${result}. 
+
+## 7) RequestParam
+- 
+
+## 8) Model Object
+
+## 9) Setting Prefix & Suffix
+
+## 10) ModelAndView
+
+## 11) Need for ModelAttribute
+
+## 12) Using ModelAttribute
+
+## 13) Spring Boot With Thymeleaf
+
