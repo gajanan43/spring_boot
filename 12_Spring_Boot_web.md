@@ -42,7 +42,7 @@ public class HomeController {
 }
 ```
 - It is working but download a index.jsp file
-- For this run JSP to Servlet by using a ```Tomcat Jasper``` .
+- For this run JSP to Servlet by using a ```Tomcat Jasper``` is denpendencies intall into project.
 
 ## 4) Sending data to controller:
 
