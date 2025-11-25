@@ -131,6 +131,34 @@ System.out.println(student.orElse(new Student()));
 ## 5) JPQL Query
 
 ```
+@Query("select s from Student s where s.firstName=?1") //doesn't mandatory to write 
+List<Student> findByName(String name);
+
+System.out.println(repo.findByName("Virat"));
+
+OR
+
+List<Student> findByAgeGreaterThan(int age);
+System.out.println(repo.findByAgeGreaterThan(20));
+```
+
+## 6) Update & Delete
 
 ```
+1 Update
+
+s2.setId(2);
+s2.setFirstName("Kohli"); //Change name
+s2.setAge(39); //change age
+
+repo.save(s2);  // if not in table then insert data otherwise work as UPDATE query
+
+2 Delete
+
+repo.delete(s2);
+```
+
+## 7) JPA in Job App
+
+
 
