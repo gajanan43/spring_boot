@@ -10,7 +10,7 @@
 8) Loading Data & Entity
 9) Search By Keyword
     
-## 2) 
+## 2) Creating Table & Inserting Data
 
 ```
 
