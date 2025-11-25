@@ -113,5 +113,24 @@ spring.jpa.show-sql= true
 ## 3) Findall
 
 ```
+StudentRepo repo=context.getBean(StudentRepo.class);
+System.out.println(repo.findAll());
+```
+
+## 4) FindById
 
 ```
+System.out.println(repo.findById(1));
+
+OR
+
+Optional<Student> student=repo.findById(1);
+System.out.println(student.orElse(new Student()));
+```
+
+## 5) JPQL Query
+
+```
+
+```
+
