@@ -142,6 +142,97 @@ public class SecurityConfig {
 
 ## 17) Creating User Table & db Properties:
 
-```
+## 18) Authentication Provider
 
 ```
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public AuthenticationProvider authProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService); // FIXED
+        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        return provider;
+    }
+```
+
+## 19) Creating a UserDetails Service
+
+```
+@Service
+public class MyUserDetailsService  implements UserDetailsService {
+
+    @Autowired
+    private UserRepo repo;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+}
+
+```
+
+## 20) User Repo
+
+```
+@Repository
+public interface UserRepo extends JpaRepository<User, Integer> {
+    User findByUsername(String username);
+}
+```
+## 21) UserDetails & Principle:
+
+## 22) Summery Till Now
+
+## 23) What is Bcrypt
+
+## 24) User Registration
+
+```
+@RestController
+public class UserController {
+
+    @Autowired
+    private UserService service;
+
+    @PostMapping("register")
+    public User register(@RequestBody  User user) {
+        return service.saveUser(user);
+    }
+}
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepo repo;
+
+    public User saveUser(User user) {
+        return repo.save(user);
+    }
+}
+
+@Repository
+public interface UserRepo extends JpaRepository<User, Integer> {
+    User findByUsername(String username);
+}
+
+```
+
+## 25) Bcrypt Encoding for User Registration
+
+```
+  @Autowired
+    private UserRepo repo;
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+    public User saveUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        System.out.println(user.getPassword());
+        return repo.save(user);
+    }
+```
+
+## 26) Setting Password Encoder
