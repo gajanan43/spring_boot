@@ -1,32 +1,7 @@
 # Annotations
 
-## 1. **@Component**
 
-➡ **Spring, please create an object of this class automatically.**
-
-Example:
-
-```java
-@Component
-class Laptop {}
-```
-
----
-
-## 2. **@Autowired**
-
-➡ **Spring, give me the object automatically (inject it).**
-
-Example:
-
-```java
-@Autowired
-Laptop laptop;
-```
-
----
-
-## 3. **@Configuration**
+## 1. **@Configuration**
 
 ➡ **This class contains bean-creating methods.**
 
@@ -39,7 +14,7 @@ class AppConfig {}
 
 ---
 
-## 4. **@Bean**
+## 2. **@Bean**
 
 ➡ **Create this object and put it in Spring container.**
 
@@ -54,7 +29,20 @@ public Laptop laptop() {
 
 ---
 
-## 5. **@ComponentScan**
+## 3. **@Component**
+
+➡ **Spring, please create an object of this class automatically.**
+
+Example:
+
+```java
+@Component
+class Laptop {}
+```
+
+---
+
+## 4. **@ComponentScan**
 
 ➡ **Spring, look in this package and find all @Component classes.**
 
@@ -62,6 +50,19 @@ Example:
 
 ```java
 @ComponentScan("com.example")
+```
+
+---
+
+## 5. **@Autowired**
+
+➡ **Spring, give me the object automatically (inject it).**
+
+Example:
+
+```java
+@Autowired
+Laptop laptop;
 ```
 
 ---
