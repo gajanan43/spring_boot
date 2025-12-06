@@ -18,17 +18,6 @@
 17) Place Order in Service Part 2
 18) Get All Orders
 
-
-
-
-
-
-
-
-
-
-
-
 ---
 ---
 
