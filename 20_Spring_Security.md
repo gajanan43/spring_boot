@@ -198,6 +198,7 @@ public class SecurityConfig {
     }
 
 ```
+- We login using admin & user Details data.
 
 ## 17) Creating User Table & db Properties:
 
