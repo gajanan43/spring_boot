@@ -202,6 +202,8 @@ public class SecurityConfig {
 
 ## 17) Creating User Table & db Properties:
 
+- Here is only create a Users table by using HardCoding(id,username,password).
+
 ## 18) Authentication Provider
 
 ```
