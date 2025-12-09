@@ -62,6 +62,7 @@ spring.security.user.password=1234
 ```
 
 - It cann't work beacuse the CSRF is blocked
+- Whenever you POST,PUT,DELETE,PATCH api it is not working beacuse it require a csrf token.
 
 ## 10) Sending CSRF Token:
 
@@ -73,6 +74,23 @@ spring.security.user.password=1234
 ```
 - By using above mapping will get a CSRF Token use it for POST Mapping.
 - Every time will get this id to POST Mapping.
+
+```
+http://localhost:8080/api/csrf-token - GET
+
+{
+    "headerName": "X-CSRF-TOKEN",
+    "parameterName": "_csrf",
+    "token": "Token_Value"
+}
+
+```
+- Add CSRF token inside the headers section of Postman
+```
+Key: X-CSRF-TOKEN
+Valune: Token_Value
+```
+- Then send the post request at that time is working properly.
 
 ## 11) Same Site Strict:
 
