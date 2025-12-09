@@ -135,6 +135,28 @@ public class SecurityConfig {
 ```
 - Buy writing this we can POST,PUT,DELETE,PATCH methods works properly.
 
+```
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+        http.csrf(customizer->customizer.disable());
+        http.authorizeHttpRequests(request->
+                request.anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.sessionManagement(session->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        return http.build();
+    }
+}
+
+```
+- Whenever i load website at time new session id will created it.
+
 ## 13) Disabling CSRF Token:
 
 ```
