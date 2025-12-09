@@ -100,6 +100,8 @@ application.properties
 server.servlet.session.cookie.same-site=strict
 ```
 
+- By setting this another user cann't access your website.
+
 ## 12) Security Configuration:
 
 ```
@@ -114,7 +116,9 @@ public class SecurityConfig {
     }
 }
 ```
-- It is allow to write our own security.
+- Spring gives you default security but you can write your own security.
+- Most of the time we are working with STATELESS REST Api(it doesn't store session id).
+- By using this no need of login form & All. 
 
 ## 13) Disabling CSRF Token:
 
