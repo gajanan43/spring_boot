@@ -118,7 +118,22 @@ public class SecurityConfig {
 ```
 - Spring gives you default security but you can write your own security.
 - Most of the time we are working with STATELESS REST Api(it doesn't store session id).
-- By using this no need of login form & All. 
+- By using this no need of login form & All.
+
+
+```
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+        http.csrf(customizer->customizer.disable());
+        return http.build();
+    }
+}
+```
+- Buy writing this we can POST,PUT,DELETE,PATCH methods works properly.
 
 ## 13) Disabling CSRF Token:
 
