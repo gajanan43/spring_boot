@@ -100,5 +100,68 @@ public class Alien {
 # ManyToOne:
 
 ```
+@Entity
+public class Alien {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private int age;
+    private String name;
+
+    // getters & setters
+}
+
+@Entity
+public class Laptop {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int lid;
+
+    private String brand;
+    private int ram;
+    private String model;
+
+    @ManyToOne
+    @JoinColumn(name = "alien_id")   // FK column
+    private Alien alien;   // ✅ SINGLE Alien
+
+    // getters & setters
+}
+
+Alien a1 = new Alien();
+a1.setName("Gajanan");
+a1.setAge(22);
+
+Alien a2 = new Alien();
+a2.setName("Omkar");
+a2.setAge(22);
+
+Laptop l1 = new Laptop();
+l1.setBrand("Dell");
+l1.setModel("11 Generation");
+l1.setRam(32);
+l1.setAlien(a1);   // ONE alien per laptop
+
+Laptop l2 = new Laptop();
+l2.setBrand("HP");
+l2.setModel("12 Generation");
+l2.setRam(16);
+l2.setAlien(a1);   // SAME alien → many laptops
+
+Transaction tx = session.beginTransaction();
+session.persist(a1);
+session.persist(a2);
+session.persist(l1);
+session.persist(l2);
+tx.commit();
+
+```
+
+# ManyToMany:
+
+```
 
 ```
