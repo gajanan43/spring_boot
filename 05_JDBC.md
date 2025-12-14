@@ -47,7 +47,10 @@ public class Main {
                 // Read-1
                 // ResultSet rs=statement.executeQuery(query);
 
-                //Update-2 & Delete-3 & Insert-4
+                //Update-2 &
+                //st.executeUpdate(query);
+
+                //Delete-3 & Insert-4
                 statement.execute(query);
                 ResultSet rs=statement.executeQuery("select * from student");
 
