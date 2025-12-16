@@ -197,9 +197,9 @@ This enables you to override defaults.
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
     http.csrf(csrf -> csrf.disable());
-    http.authorizeHttpRequests(req -> req.anyRequest().authenticated());
-    http.httpBasic(Customizer.withDefaults());
-    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    http.authorizeHttpRequests(req -> req.anyRequest().authenticated());  //It allows ALL HTTP requests without login
+    http.httpBasic(Customizer.withDefaults()); //Enables HTTP Basic Authentication with default settings(username + password)
+    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); //Do NOT create or use HTTP sessions
 
     return http.build();
 }
