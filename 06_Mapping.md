@@ -11,7 +11,7 @@ public class Alien {
     private String name;
 
     @OneToOne
-    private Laptop laptops;
+    private Laptop laptop;
 }
 
 @Entity
