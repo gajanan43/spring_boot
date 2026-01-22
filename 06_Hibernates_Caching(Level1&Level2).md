@@ -69,3 +69,41 @@ Ans======================Hibernate: select s1_0.id,s1_0.age,s1_0.name,l1_0.Stude
 
 ```
 
+# Hibernate.cfg.xml file:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/mydb
+        </property>
+
+        <property name="hibernate.connection.username">
+            root
+        </property>
+
+        <property name="hibernate.connection.password">
+            mysql
+        </property>
+
+        <!-- Hibernate behavior -->
+        <property name="hibernate.show_sql">true</property>
+<!--        <property name="hibernate.format_sql">true</property>-->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+
+
+    </session-factory>
+</hibernate-configuration>
+```
+
