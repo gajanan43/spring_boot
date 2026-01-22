@@ -10,7 +10,8 @@ public class Alien {
     private int age;
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="Laptop_id")
     private Laptop laptop;
 }
 
