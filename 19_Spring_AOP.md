@@ -321,7 +321,9 @@ Spring applies it automatically.
 
 ---
 ## Example:
+```
 execution(* com.example.demo.service.*.*(..))
+```
 
 | Part                       | Meaning         |
 | -------------------------- | --------------- |
