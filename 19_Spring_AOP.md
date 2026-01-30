@@ -320,5 +320,15 @@ Spring applies it automatically.
 * **Around = full control (before + after + modify input/output)**
 
 ---
+## Example:
+execution(* com.example.demo.service.*.*(..))
 
+| Part                       | Meaning         |
+| -------------------------- | --------------- |
+| `execution`                | Join point type |
+| `*`                        | Any return type |
+| `com.example.demo.service` | Target package  |
+| `*`                        | Any class       |
+| `*`                        | Any method      |
+| `(..)`                     | Any arguments   |
 
